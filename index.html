@@ -2,261 +2,738 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bijou Manager</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VÉRA — Gestão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+:root {
+  --cream: #f5f0eb;
+  --warm-white: #faf8f5;
+  --parchment: #ede8e1;
+  --stone: #c8bfb0;
+  --taupe: #9e9085;
+  --umber: #6b5f52;
+  --deep: #3a322b;
+  --rouge: #8b3a3a;
+  --rouge-light: #c27070;
+  --gold: #b8975a;
+  --gold-light: #d4b97a;
+  --success: #4a7c59;
+  --danger: #8b3a3a;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #0f172a; color: #e2e8f0; font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
-.wrap { max-width: 960px; margin: 0 auto; padding-bottom: 60px; }
-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 24px 20px; border-bottom: 1px solid #1e293b; }
-.logo-row { display: flex; align-items: center; gap: 14px; }
-.gem { font-size: 36px; color: #c084fc; }
-.brand { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: #f1f5f9; }
-.sub { font-size: 12px; color: #64748b; margin-top: 2px; }
-.conn-badge { font-size: 12px; background: #1e293b; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
-nav { display: flex; gap: 4px; padding: 12px 24px; border-bottom: 1px solid #1e293b; flex-wrap: wrap; }
-.nav-btn { background: transparent; border: none; color: #64748b; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-.nav-btn.active { background: #1e293b; color: #e2e8f0; }
-.card { margin: 20px 24px 0; background: #1e293b; border-radius: 12px; padding: 24px; }
-.card-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #f1f5f9; }
-.card-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.help-text { color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
-.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-label { font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-input, select { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px 12px; color: #e2e8f0; font-size: 14px; outline: none; width: 100%; }
-input:focus, select:focus { border-color: #7c3aed; }
-select option { background: #1e293b; }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 16px; }
-.add-item-row { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 16px; flex-wrap: wrap; }
+
+body {
+  background: var(--warm-white);
+  color: var(--deep);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--warm-white);
+  border-bottom: 1px solid var(--parchment);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: var(--deep);
+  text-transform: uppercase;
+}
+
+.logo span {
+  font-style: italic;
+  color: var(--rouge);
+}
+
+.conn-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.conn-dot { color: var(--success); font-size: 8px; }
+
+/* ── NAV ── */
+nav {
+  background: var(--warm-white);
+  border-bottom: 1px solid var(--parchment);
+  padding: 0 32px;
+  display: flex;
+  gap: 0;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--taupe);
+  padding: 16px 20px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all .2s;
+  margin-bottom: -1px;
+}
+
+.nav-btn:hover { color: var(--deep); }
+.nav-btn.active { color: var(--deep); border-bottom-color: var(--rouge); }
+
+/* ── WRAP ── */
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--deep);
+  margin: 36px 0 20px;
+  letter-spacing: 0.02em;
+}
+
+.section-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 20px;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--warm-white);
+  border: 1px solid var(--parchment);
+  border-radius: 2px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--parchment);
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--deep);
+}
+
+/* ── FIELDS ── */
+.field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+
+.field label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+input, select {
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 1px;
+  padding: 11px 14px;
+  color: var(--deep);
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  width: 100%;
+  transition: border-color .2s;
+  -webkit-appearance: none;
+}
+
+input:focus, select:focus { border-color: var(--rouge); }
+select option { background: var(--warm-white); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 20px; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  background: var(--deep);
+  border: none;
+  color: var(--cream);
+  padding: 13px 32px;
+  border-radius: 1px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.btn-primary:hover { background: var(--umber); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-secondary {
+  background: none;
+  border: 1px solid var(--stone);
+  color: var(--umber);
+  padding: 9px 18px;
+  border-radius: 1px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.btn-secondary:hover { border-color: var(--umber); background: var(--parchment); }
+
+.btn-edit {
+  background: none;
+  border: 1px solid var(--stone);
+  color: var(--taupe);
+  padding: 5px 12px;
+  border-radius: 1px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all .2s;
+}
+.btn-edit:hover { border-color: var(--rouge); color: var(--rouge); }
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: var(--stone);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px 6px;
+  transition: color .2s;
+}
+.btn-remove:hover { color: var(--rouge); }
+
+/* ── ADD ITEM ROW ── */
+.add-item-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; }
 .add-item-row .field { margin-bottom: 0; }
 .flex3 { flex: 3; min-width: 180px; }
 .flex1 { flex: 1; min-width: 70px; }
-.btn-primary { background: linear-gradient(135deg, #7c3aed, #4f46e5); border: none; color: #fff; padding: 12px 28px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 14px; }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-secondary { background: #334155; border: none; color: #e2e8f0; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; white-space: nowrap; }
-.btn-warning { background: #92400e; border: none; color: #fcd34d; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
-.btn-remove { background: transparent; border: none; color: #f87171; cursor: pointer; font-size: 14px; padding: 2px 6px; }
+
+/* ── TABLE ── */
 .table-wrap { overflow-x: auto; margin-bottom: 8px; }
+
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th { text-align: left; padding: 8px 12px; color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #334155; }
-td { padding: 10px 12px; color: #cbd5e1; vertical-align: middle; }
-tr.even { background: rgba(255,255,255,0.02); }
-.code { background: #0f172a; color: #c084fc; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-family: monospace; }
-.margin-chip { background: #1a2744; color: #818cf8; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
-.stock-chip { color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; }
-.stock-ok { background: #14532d; } .stock-low { background: #713f12; } .stock-zero { background: #7f1d1d; }
-.margin-box { background: #0f172a; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
-.margin-label { font-size: 11px; color: #64748b; text-transform: uppercase; }
-.margin-val { font-size: 22px; font-weight: 800; color: #4ade80; }
-.margin-sub { font-size: 12px; color: #94a3b8; }
-.resumo { background: #0f172a; border-radius: 8px; padding: 16px; margin-top: 12px; }
-.resumo-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 14px; color: #94a3b8; }
-.resumo-total { border-top: 1px solid #334155; padding-top: 8px; margin-top: 4px; font-weight: 700; }
-.green { color: #4ade80; } .red { color: #f87171; } .purple { color: #818cf8; } .yellow { color: #fcd34d; }
-.alert-card { border-left: 4px solid #f87171; }
-.alert-title { color: #f87171; }
-.toast { position: fixed; top: 20px; right: 20px; z-index: 999; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; max-width: 340px; display: none; }
-.toast.ok { background: #14532d; color: #4ade80; border: 1px solid #166534; }
-.toast.err { background: #7f1d1d; color: #fca5a5; border: 1px solid #991b1b; }
-.toast.show { display: block; animation: fadeIn .2s ease; }
-.toast.loading { background: #1e3a5f; color: #93c5fd; border: 1px solid #1d4ed8; display: block; }
-@keyframes fadeIn { from { opacity:0; transform: translateY(-8px); } to { opacity:1; transform: translateY(0); } }
-.hidden { display: none !important; }
-.mt16 { margin-top: 16px; }
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: flex; align-items: center; justify-content: center; }
-.modal { background: #1e293b; border-radius: 14px; padding: 28px; width: 440px; max-width: 95vw; }
-.modal-title { font-size: 16px; font-weight: 700; color: #f1f5f9; margin-bottom: 20px; }
-.modal-btns { display: flex; gap: 10px; margin-top: 20px; }
-.kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 20px 24px 0; }
-.kpi-card { background: #1e293b; border-radius: 12px; padding: 18px 20px; }
-.kpi-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-.kpi-val { font-size: 22px; font-weight: 800; color: #f1f5f9; }
-.kpi-sub { font-size: 12px; color: #94a3b8; margin-top: 4px; }
-.mes-badge { background: #0f172a; color: #818cf8; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-.desc-chip { background: #422006; color: #fb923c; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
-.frete-row { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 14px; flex-wrap: wrap; }
+
+thead tr { border-bottom: 1px solid var(--parchment); }
+
+th {
+  text-align: left;
+  padding: 10px 14px;
+  color: var(--taupe);
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 13px 14px;
+  color: var(--umber);
+  border-bottom: 1px solid var(--parchment);
+  font-weight: 300;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--cream); }
+
+/* ── CHIPS ── */
+.code-chip {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--taupe);
+  background: var(--parchment);
+  padding: 2px 8px;
+  border-radius: 1px;
+}
+
+.margin-chip {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+.stock-chip {
+  display: inline-block;
+  min-width: 28px;
+  text-align: center;
+  padding: 3px 8px;
+  border-radius: 1px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.stock-ok { background: #eef4f0; color: var(--success); }
+.stock-low { background: #fdf5e8; color: var(--gold); }
+.stock-zero { background: #fdf0f0; color: var(--rouge); }
+
+.frete-pago-badge {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--success);
+  border: 1px solid #c5dac9;
+  padding: 2px 7px;
+  border-radius: 1px;
+}
+
+.desc-chip {
+  font-size: 11px;
+  color: var(--gold);
+}
+
+/* ── RESUMO ── */
+.resumo {
+  background: var(--cream);
+  border: 1px solid var(--parchment);
+  border-radius: 1px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+
+.resumo-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 13px;
+  color: var(--taupe);
+}
+
+.resumo-total {
+  border-top: 1px solid var(--stone);
+  padding-top: 10px;
+  margin-top: 6px;
+  font-weight: 400;
+  color: var(--deep);
+  font-size: 14px;
+}
+
+/* ── MARGEM BOX ── */
+.margem-preview {
+  background: var(--cream);
+  border: 1px solid var(--parchment);
+  border-radius: 1px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.margem-preview .label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--taupe); }
+.margem-preview .val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--success); }
+.margem-preview .sub { font-size: 12px; color: var(--taupe); margin-top: 2px; }
+
+/* ── FRETE ROW ── */
+.frete-row { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 16px; flex-wrap: wrap; }
 .frete-row .field { margin-bottom: 0; flex: 1; min-width: 120px; }
-.checkbox-field { display: flex; flex-direction: column; gap: 6px; justify-content: flex-end; flex: 1.4; min-width: 180px; }
-.checkbox-label-text { font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-.check-row { display: flex; align-items: center; gap: 8px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px 12px; cursor: pointer; min-height: 42px; }
-.check-row input[type=checkbox] { width: 16px; height: 16px; accent-color: #4ade80; cursor: pointer; flex-shrink: 0; }
-.check-row span { font-size: 13px; color: #94a3b8; }
-.check-row.checked { border-color: #4ade80; background: #052e16; }
-.check-row.checked span { color: #4ade80; }
-.frete-pago-badge { background: #052e16; color: #4ade80; border: 1px solid #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
-@media(max-width:600px){ .kpi-grid { grid-template-columns: 1fr 1fr; } .grid3 { grid-template-columns: 1fr 1fr; } }
+.checkbox-field { display: flex; flex-direction: column; gap: 7px; flex: 1.4; min-width: 180px; }
+.checkbox-label-text { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); }
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 1px;
+  padding: 11px 14px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.check-row input[type=checkbox] { width: 14px; height: 14px; accent-color: var(--success); cursor: pointer; flex-shrink: 0; }
+.check-row span { font-size: 12px; color: var(--taupe); }
+.check-row.checked { border-color: var(--success); background: #eef4f0; }
+.check-row.checked span { color: var(--success); }
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin: 32px 0 24px; }
+
+.kpi-card {
+  background: var(--warm-white);
+  border: 1px solid var(--parchment);
+  border-radius: 1px;
+  padding: 20px 22px;
+}
+
+.kpi-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); margin-bottom: 8px; }
+
+.kpi-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--deep);
+}
+
+.kpi-sub { font-size: 11px; color: var(--stone); margin-top: 4px; }
+
+.mes-badge {
+  font-size: 12px;
+  color: var(--umber);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ── COLORS ── */
+.c-green { color: var(--success); }
+.c-red { color: var(--rouge); }
+.c-gold { color: var(--gold); }
+.c-taupe { color: var(--taupe); }
+
+/* ── CONNECT SCREEN ── */
+.connect-screen {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.connect-box {
+  text-align: center;
+  max-width: 420px;
+}
+
+.connect-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--deep);
+  margin-bottom: 4px;
+}
+
+.connect-logo em { font-style: italic; color: var(--rouge); }
+
+.connect-tagline {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 40px;
+}
+
+.connect-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--stone);
+  margin: 24px auto;
+}
+
+.connect-text {
+  font-size: 13px;
+  color: var(--taupe);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58,50,43,0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: var(--warm-white);
+  border: 1px solid var(--parchment);
+  border-radius: 2px;
+  padding: 36px;
+  width: 460px;
+  max-width: 100%;
+}
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--deep);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--parchment);
+}
+
+.modal-btns { display: flex; gap: 12px; margin-top: 24px; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 999;
+  padding: 14px 22px;
+  border-radius: 1px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  max-width: 340px;
+  display: none;
+  border-left: 3px solid transparent;
+}
+
+.toast.ok { background: var(--warm-white); border: 1px solid var(--parchment); border-left-color: var(--success); color: var(--success); display: block; animation: fadeIn .2s ease; }
+.toast.err { background: var(--warm-white); border: 1px solid var(--parchment); border-left-color: var(--rouge); color: var(--rouge); display: block; animation: fadeIn .2s ease; }
+.toast.loading { background: var(--warm-white); border: 1px solid var(--parchment); border-left-color: var(--gold); color: var(--gold); display: block; }
+
+@keyframes fadeIn { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform: translateY(0); } }
+
+.hidden { display: none !important; }
+.mt20 { margin-top: 20px; }
+
+@media(max-width:640px) {
+  header { padding: 0 20px; }
+  nav { padding: 0 16px; overflow-x: auto; }
+  .nav-btn { padding: 14px 12px; font-size: 10px; }
+  .wrap { padding: 0 16px 80px; }
+  .card { padding: 20px; }
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .frete-row { flex-direction: column; }
+  .add-item-row { flex-direction: column; }
+  .add-item-row .flex3, .add-item-row .flex1 { width: 100%; }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="toast" id="toast"></div>
 
-  <!-- Modal editar -->
-  <div class="modal-overlay hidden" id="modal-overlay">
-    <div class="modal">
-      <div class="modal-title">✏️ Editar Produto</div>
-      <input type="hidden" id="edit-codigo-orig">
-      <div class="field"><label>Código</label><input id="edit-codigo" readonly style="opacity:.5"></div>
-      <div class="field"><label>Nome</label><input id="edit-nome"></div>
-      <div class="grid3">
-        <div class="field"><label>Valor Compra</label><input id="edit-compra" type="number" step="0.01"></div>
-        <div class="field"><label>Valor Venda</label><input id="edit-venda" type="number" step="0.01"></div>
-        <div class="field"><label>Qtd Estoque</label><input id="edit-estoque" type="number"></div>
-      </div>
-      <div class="modal-btns">
-        <button class="btn-primary" id="btn-salvar-edicao">Salvar</button>
-        <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
-      </div>
+<div class="toast" id="toast"></div>
+
+<!-- Modal editar -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-title">Editar Produto</div>
+    <input type="hidden" id="edit-codigo-orig">
+    <div class="field"><label>Código</label><input id="edit-codigo" readonly style="opacity:.5;background:var(--parchment)"></div>
+    <div class="field"><label>Nome</label><input id="edit-nome"></div>
+    <div class="grid3">
+      <div class="field"><label>Valor Compra</label><input id="edit-compra" type="number" step="0.01"></div>
+      <div class="field"><label>Valor Venda</label><input id="edit-venda" type="number" step="0.01"></div>
+      <div class="field"><label>Qtd Estoque</label><input id="edit-estoque" type="number"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-primary" id="btn-salvar-edicao">Salvar alterações</button>
+      <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
     </div>
   </div>
+</div>
 
+<!-- CONNECT -->
+<div id="screen-connect">
   <header>
-    <div class="logo-row">
-      <span class="gem">◈</span>
-      <div>
-        <div class="brand">Bijou Manager</div>
-        <div class="sub">Controle de loja de bijuteria</div>
-      </div>
+    <div class="logo">V<span>É</span>RA</div>
+  </header>
+  <div class="connect-screen">
+    <div class="connect-box">
+      <div class="connect-logo">V<em>É</em>RA</div>
+      <div class="connect-tagline">It's never just an accessory</div>
+      <div class="connect-divider"></div>
+      <p class="connect-text">Conecte sua planilha para começar a gerir sua loja.</p>
+      <button class="btn-primary" id="btn-connect" style="width:100%;padding:16px">Conectar Planilha</button>
     </div>
-    <div class="conn-badge hidden" id="conn-badge"><span style="color:#4ade80">●</span> Planilha conectada</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="screen-app" class="hidden">
+  <header>
+    <div class="logo">V<span>É</span>RA</div>
+    <div class="conn-badge hidden" id="conn-badge">
+      <span class="conn-dot">●</span> Conectado
+    </div>
   </header>
 
-  <div id="screen-connect">
-    <div class="card">
-      <div class="card-title">🔗 Conectar ao Google Sheets</div>
-      <p class="help-text">Clique abaixo para conectar sua planilha e começar a usar.</p>
-      <button class="btn-primary" id="btn-connect">✓ Conectar Planilha</button>
-    </div>
-  </div>
+  <nav>
+    <button class="nav-btn active" id="nav-produtos" onclick="showTab('produtos')">Produtos</button>
+    <button class="nav-btn" id="nav-pedidos" onclick="showTab('pedidos')">Pedidos</button>
+    <button class="nav-btn" id="nav-estoque" onclick="showTab('estoque')">Estoque</button>
+    <button class="nav-btn" id="nav-relatorio" onclick="showTab('relatorio')">Relatório</button>
+  </nav>
 
-  <div id="screen-app" class="hidden">
-    <nav>
-      <button class="nav-btn active" id="nav-produtos" onclick="showTab('produtos')">📦 Produtos</button>
-      <button class="nav-btn" id="nav-pedidos" onclick="showTab('pedidos')">🛍️ Pedidos</button>
-      <button class="nav-btn" id="nav-estoque" onclick="showTab('estoque')">📊 Estoque</button>
-      <button class="nav-btn" id="nav-relatorio" onclick="showTab('relatorio')">📈 Relatório</button>
-    </nav>
+  <div class="wrap">
 
     <!-- PRODUTOS -->
     <div id="tab-produtos">
+      <p class="section-title">Cadastrar Produto</p>
       <div class="card">
-        <div class="card-title">📦 Cadastrar Produto</div>
         <div class="grid2">
           <div class="field"><label>Código *</label><input id="p-codigo" placeholder="BIJ-001"></div>
-          <div class="field"><label>Nome do Produto *</label><input id="p-nome" placeholder="Colar Pérola Barroca"></div>
+          <div class="field"><label>Nome *</label><input id="p-nome" placeholder="Colar Pérola Barroca"></div>
           <div class="field"><label>Valor de Compra (R$) *</label><input id="p-compra" type="number" step="0.01" placeholder="12.50"></div>
           <div class="field"><label>Valor de Venda (R$) *</label><input id="p-venda" type="number" step="0.01" placeholder="35.00"></div>
           <div class="field"><label>Estoque Inicial</label><input id="p-estoque" type="number" placeholder="10"></div>
-          <div class="margin-box hidden" id="margem-box">
-            <div class="margin-label">Margem calculada</div>
-            <div class="margin-val" id="margem-val">0%</div>
-            <div class="margin-sub" id="margem-sub">Lucro: R$ 0,00</div>
+          <div class="margem-preview hidden" id="margem-box">
+            <div class="label">Margem calculada</div>
+            <div class="val" id="margem-val">0%</div>
+            <div class="sub" id="margem-sub">Lucro: R$ 0,00</div>
           </div>
         </div>
-        <button class="btn-primary" id="btn-salvar-produto">Cadastrar Produto</button>
+        <button class="btn-primary" id="btn-salvar-produto">Adicionar Produto</button>
       </div>
-      <div class="card hidden" id="card-lista">
-        <div class="card-title" id="titulo-lista">Lista de Produtos</div>
-        <div class="table-wrap">
-          <table><thead><tr><th>Código</th><th>Nome</th><th>Compra</th><th>Venda</th><th>Margem</th><th>Estoque</th><th></th></tr></thead>
-          <tbody id="tbody-produtos"></tbody></table>
+
+      <div id="card-lista" class="hidden">
+        <p class="section-title" id="titulo-lista">Produtos</p>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Código</th><th>Nome</th><th>Compra</th><th>Venda</th><th>Margem</th><th>Estoque</th><th></th></tr></thead>
+              <tbody id="tbody-produtos"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- PEDIDOS -->
     <div id="tab-pedidos" class="hidden">
+      <p class="section-title">Novo Pedido</p>
       <div class="card">
-        <div class="card-title">🛍️ Novo Pedido</div>
         <div class="grid3">
-          <div class="field"><label>Cliente (opcional)</label><input id="ped-cliente" placeholder="Nome do cliente"></div>
+          <div class="field"><label>Cliente</label><input id="ped-cliente" placeholder="Nome do cliente"></div>
           <div class="field"><label>Data da Compra</label><input id="ped-data" type="date"></div>
           <div class="field"><label>% Desconto Global</label><input id="ped-desconto" type="number" min="0" max="100" placeholder="0"></div>
         </div>
+
         <div class="add-item-row">
-          <div class="field flex3"><label>Produto</label><select id="ped-produto"><option value="">-- Selecionar produto --</option></select></div>
+          <div class="field flex3"><label>Produto</label>
+            <select id="ped-produto"><option value="">— Selecionar produto —</option></select>
+          </div>
           <div class="field flex1"><label>Qtd</label><input id="ped-qtd" type="number" min="1" value="1"></div>
-          <button class="btn-secondary" id="btn-add-item">+ Adicionar</button>
+          <button class="btn-secondary" id="btn-add-item" style="height:44px;align-self:flex-end">+ Adicionar</button>
         </div>
+
         <div class="table-wrap hidden" id="wrap-itens">
-          <table><thead><tr><th>Produto</th><th>Qtd</th><th>Venda Unit</th><th>Custo Unit</th><th>Subtotal</th><th>c/Desc</th><th></th></tr></thead>
-          <tbody id="tbody-itens"></tbody></table>
+          <table>
+            <thead><tr><th>Produto</th><th>Qtd</th><th>Venda Unit</th><th>Custo Unit</th><th>Subtotal</th><th>c/Desc</th><th></th></tr></thead>
+            <tbody id="tbody-itens"></tbody>
+          </table>
         </div>
-        <div class="frete-row">
+
+        <div class="frete-row" style="margin-top:8px">
           <div class="field"><label>Frete (R$)</label><input id="ped-frete" type="number" step="0.01" placeholder="0.00"></div>
           <div class="checkbox-field">
             <span class="checkbox-label-text">Frete</span>
             <div class="check-row" id="check-frete-row" onclick="toggleFretePago()">
               <input type="checkbox" id="frete-pago-cliente" onclick="event.stopPropagation();toggleFretePago()">
-              <span id="frete-pago-label">Pago pelo cliente (não impacta custo)</span>
+              <span>Pago pelo cliente — não impacta custo</span>
             </div>
           </div>
           <div class="field"><label>Embalagem (R$)</label><input id="ped-embalagem" type="number" step="0.01" placeholder="0.00"></div>
         </div>
+
         <div class="resumo hidden" id="resumo-pedido">
           <div class="resumo-row"><span>Receita bruta</span><span id="res-bruto"></span></div>
-          <div class="resumo-row"><span id="res-desc-label">Desconto (0%)</span><span class="yellow" id="res-desc"></span></div>
-          <div class="resumo-row"><span>Receita líquida</span><span class="green" id="res-receita"></span></div>
-          <div class="resumo-row hidden" id="row-frete-info"><span id="res-frete-label">Frete pago pelo cliente</span><span class="green" id="res-frete-val"></span></div>
-          <div class="resumo-row"><span>Custo das peças</span><span class="red" id="res-custo-pecas"></span></div>
-          <div class="resumo-row"><span>Embalagem + Frete s/ custo</span><span class="red" id="res-extra"></span></div>
-          <div class="resumo-row"><span>Custo total</span><span class="red" id="res-custo"></span></div>
-          <div class="resumo-row resumo-total"><span>Lucro do pedido</span><span id="res-lucro" style="font-size:18px"></span></div>
-          <div class="resumo-row resumo-total"><span>Margem do pedido</span><span id="res-margem" style="font-size:16px" class="purple"></span></div>
+          <div class="resumo-row"><span id="res-desc-label">Desconto (0%)</span><span class="c-gold" id="res-desc"></span></div>
+          <div class="resumo-row"><span>Receita líquida</span><span class="c-green" id="res-receita"></span></div>
+          <div class="resumo-row hidden" id="row-frete-info"><span>Frete pago pelo cliente</span><span class="c-green" id="res-frete-val"></span></div>
+          <div class="resumo-row"><span>Custo das peças</span><span class="c-red" id="res-custo-pecas"></span></div>
+          <div class="resumo-row"><span>Frete + Embalagem</span><span class="c-red" id="res-extra"></span></div>
+          <div class="resumo-row"><span>Custo total</span><span class="c-red" id="res-custo"></span></div>
+          <div class="resumo-row resumo-total"><span>Lucro do pedido</span><span id="res-lucro" style="font-size:16px"></span></div>
+          <div class="resumo-row resumo-total"><span>Margem do pedido</span><span id="res-margem" class="c-gold" style="font-size:15px"></span></div>
         </div>
-        <button class="btn-primary mt16" id="btn-finalizar">✓ Finalizar Pedido</button>
+
+        <button class="btn-primary mt20" id="btn-finalizar">Finalizar Pedido</button>
       </div>
 
-      <div class="card" id="card-historico">
-        <div class="card-title-row">
-          <div class="card-title">🗂️ Histórico de Pedidos</div>
-          <button class="btn-secondary" id="btn-atualizar-historico">↻ Atualizar</button>
+      <!-- HISTÓRICO -->
+      <p class="section-title">Histórico</p>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="card-header" style="padding:20px 28px 16px;margin-bottom:0">
+          <span class="card-title">Pedidos</span>
+          <button class="btn-secondary" id="btn-atualizar-historico">Atualizar</button>
         </div>
-        <div id="historico-vazio" class="help-text hidden">Nenhum pedido registrado ainda.</div>
+        <div id="historico-vazio" class="hidden" style="padding:24px 28px;color:var(--taupe);font-size:13px">Nenhum pedido registrado ainda.</div>
         <div class="table-wrap">
-          <table><thead><tr><th>ID</th><th>Data</th><th>Cliente</th><th>Itens</th><th>Frete</th><th>Receita</th><th>Lucro</th><th>Margem</th></tr></thead>
-          <tbody id="tbody-historico"></tbody></table>
+          <table>
+            <thead><tr><th>ID</th><th>Data</th><th>Cliente</th><th>Itens</th><th>Frete</th><th>Receita</th><th>Lucro</th><th>Margem</th></tr></thead>
+            <tbody id="tbody-historico"></tbody>
+          </table>
         </div>
       </div>
     </div>
 
     <!-- ESTOQUE -->
     <div id="tab-estoque" class="hidden">
-      <div class="card alert-card hidden" id="card-baixo">
-        <div class="card-title alert-title" id="titulo-baixo">⚠️ Estoque Baixo</div>
-        <div class="table-wrap"><table><thead><tr><th>Código</th><th>Nome</th><th>Estoque</th><th>Venda</th><th></th></tr></thead>
-        <tbody id="tbody-baixo"></tbody></table></div>
-      </div>
-      <div class="card">
-        <div class="card-title-row">
-          <div class="card-title">📊 Estoque Completo</div>
-          <button class="btn-secondary" id="btn-atualizar-estoque">↻ Atualizar</button>
+      <p class="section-title">Estoque</p>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="card-header" style="padding:20px 28px 16px;margin-bottom:0">
+          <span class="card-title">Todos os produtos</span>
+          <button class="btn-secondary" id="btn-atualizar-estoque">Atualizar</button>
         </div>
         <div class="table-wrap">
-          <table><thead><tr><th>Código</th><th>Nome</th><th>Compra</th><th>Venda</th><th>Margem</th><th>Estoque</th><th>Val. Estoque</th><th></th></tr></thead>
-          <tbody id="tbody-estoque"></tbody></table>
+          <table>
+            <thead><tr><th>Código</th><th>Nome</th><th>Compra</th><th>Venda</th><th>Margem</th><th>Estoque</th><th>Val. Estoque</th><th></th></tr></thead>
+            <tbody id="tbody-estoque"></tbody>
+          </table>
         </div>
-        <div class="resumo" id="resumo-estoque"></div>
+        <div id="resumo-estoque" style="padding:16px 28px;border-top:1px solid var(--parchment)"></div>
       </div>
     </div>
 
     <!-- RELATÓRIO -->
     <div id="tab-relatorio" class="hidden">
+      <p class="section-title">Relatório Financeiro</p>
       <div class="kpi-grid" id="kpi-grid"></div>
-      <div class="card" style="margin-top:16px">
-        <div class="card-title-row">
-          <div class="card-title">📅 Resultado Mês a Mês</div>
-          <button class="btn-secondary" id="btn-atualizar-relatorio">↻ Atualizar</button>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="card-header" style="padding:20px 28px 16px;margin-bottom:0">
+          <span class="card-title">Mês a mês</span>
+          <button class="btn-secondary" id="btn-atualizar-relatorio">Atualizar</button>
         </div>
         <div class="table-wrap">
-          <table><thead><tr><th>Mês</th><th>Pedidos</th><th>Receita Líquida</th><th>Custo Total</th><th>Lucro</th><th>Margem</th></tr></thead>
-          <tbody id="tbody-relatorio"></tbody></table>
+          <table>
+            <thead><tr><th>Mês</th><th>Pedidos</th><th>Receita Líquida</th><th>Custo Total</th><th>Lucro</th><th>Margem</th></tr></thead>
+            <tbody id="tbody-relatorio"></tbody>
+          </table>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+  </div><!-- /wrap -->
+</div><!-- /screen-app -->
 
 <script>
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwbQEJjWjhZutut_k8ocWAnEqH9x7UMlFzbkdbuU5iKLb-7RUdQJscCGiQeTtqc8Z5oiA/exec";
@@ -264,136 +741,112 @@ var produtos = [];
 var pedidosCache = [];
 var itensPedido = [];
 
-function fmtBRL(v) { return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
-function fmtPct(v) { return Number(v||0).toFixed(1)+'%'; }
-function today() { return new Date().toISOString().split('T')[0]; }
-function strCod(v) { return String(v||'').trim(); }
+function fmtBRL(v){ return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+function fmtPct(v){ return Number(v||0).toFixed(1)+'%'; }
+function today(){ return new Date().toISOString().split('T')[0]; }
+function strCod(v){ return String(v||'').trim(); }
 
-function showToast(msg, type) {
-  type = type||'ok';
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast show '+type;
-  if (type !== 'loading') setTimeout(function(){ t.className='toast'; }, 3500);
+function showToast(msg,type){
+  type=type||'ok';
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast '+type;
+  if(type!=='loading') setTimeout(function(){t.className='toast';},3500);
 }
-function hideToast() { document.getElementById('toast').className = 'toast'; }
+function hideToast(){ document.getElementById('toast').className='toast'; }
+function setLoading(id,v,lbl){ var b=document.getElementById(id); if(!b)return; b.disabled=v; if(lbl)b.textContent=v?'Aguarde…':lbl; }
 
-function setLoading(btnId, loading, label) {
-  var btn = document.getElementById(btnId);
-  if (!btn) return;
-  btn.disabled = loading;
-  if (label) btn.textContent = loading ? 'Aguarde...' : label;
-}
-
-// ── API ───────────────────────────────────────────────────────────────────
-function gsGet(sheet) {
+function gsGet(sheet){
   return fetch(SCRIPT_URL+'?sheet='+encodeURIComponent(sheet))
-    .then(function(r){ return r.json(); })
-    .then(function(d){ if(d.error) throw new Error(d.error); return d.values||[]; });
+    .then(function(r){return r.json();})
+    .then(function(d){if(d.error)throw new Error(d.error);return d.values||[];});
 }
-
-function gsPost(body) {
-  return fetch(SCRIPT_URL, {method:'POST', body:JSON.stringify(body)})
-    .then(function(r){ return r.json(); })
-    .then(function(d){ if(d.error) throw new Error(d.error); return d; });
+function gsPost(body){
+  return fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
+    .then(function(r){return r.json();})
+    .then(function(d){if(d.error)throw new Error(d.error);return d;});
 }
-
-// Carrega Produtos + Pedidos em 1 chamada só
-function loadAll() {
+function loadAll(){
   return fetch(SCRIPT_URL+'?action=loadAll')
-    .then(function(r){ return r.json(); })
+    .then(function(r){return r.json();})
     .then(function(d){
-      if(d.error) throw new Error(d.error);
+      if(d.error)throw new Error(d.error);
       processProdutos(d.produtos||[]);
-      pedidosCache = d.pedidos||[];
+      pedidosCache=d.pedidos||[];
     });
 }
 
-// ── CONNECT ───────────────────────────────────────────────────────────────
-document.getElementById('btn-connect').addEventListener('click', function() {
-  setLoading('btn-connect', true, '✓ Conectar Planilha');
-  showToast('Conectando...', 'loading');
-  gsPost({
-    action: 'initHeaders',
-    sheets: [
-      {name:'Produtos',  header:["Código","Nome","Valor Compra","Valor Venda","Estoque"]},
-      {name:'Pedidos',   header:["ID Pedido","Data","Cliente","Frete","Frete Pago Cliente","Embalagem","Receita Bruta","Desconto","Receita Liquida","Custo Pecas","Custo Total","Lucro","Margem%","Qtd Itens"]},
-      {name:'ItensPedido',header:["ID Pedido","Código Produto","Nome","Qtd","Valor Venda Unit","Custo Unit","Subtotal Venda","Subtotal c/Desc","Subtotal Custo"]},
-      {name:'Estoque',   header:["Código","Nome","Estoque Atual","Última Atualização"]}
-    ]
-  })
-  .then(function(){ return loadAll(); })
+// ── CONNECT ──────────────────────────────────────────────────────────────
+document.getElementById('btn-connect').addEventListener('click',function(){
+  setLoading('btn-connect',true,'Conectar Planilha');
+  showToast('Conectando…','loading');
+  gsPost({action:'initHeaders',sheets:[
+    {name:'Produtos',  header:["Código","Nome","Valor Compra","Valor Venda","Estoque"]},
+    {name:'Pedidos',   header:["ID Pedido","Data","Cliente","Frete","Frete Pago Cliente","Embalagem","Receita Bruta","Desconto","Receita Liquida","Custo Pecas","Custo Total","Lucro","Margem%","Qtd Itens"]},
+    {name:'ItensPedido',header:["ID Pedido","Código Produto","Nome","Qtd","Valor Venda Unit","Custo Unit","Subtotal Venda","Subtotal c/Desc","Subtotal Custo"]},
+    {name:'Estoque',   header:["Código","Nome","Estoque Atual","Última Atualização"]}
+  ]})
+  .then(function(){return loadAll();})
   .then(function(){
     document.getElementById('screen-connect').classList.add('hidden');
     document.getElementById('screen-app').classList.remove('hidden');
     document.getElementById('conn-badge').classList.remove('hidden');
-    hideToast();
-    showToast('Conectado com sucesso! ✓');
-    setLoading('btn-connect', false, '✓ Conectar Planilha');
+    hideToast(); showToast('Conectado ✓');
+    setLoading('btn-connect',false,'Conectar Planilha');
   })
-  .catch(function(e){
-    showToast('Falha: '+e.message,'err');
-    setLoading('btn-connect', false, '✓ Conectar Planilha');
-  });
+  .catch(function(e){showToast('Falha: '+e.message,'err');setLoading('btn-connect',false,'Conectar Planilha');});
 });
 
-// ── PROCESSAR DADOS ───────────────────────────────────────────────────────
-function processProdutos(rows) {
-  produtos = [];
+// ── PROCESSAR ────────────────────────────────────────────────────────────
+function processProdutos(rows){
+  produtos=[];
   rows.slice(1).forEach(function(r,idx){
-    if(!r[0]) return;
-    produtos.push({codigo:strCod(r[0]), nome:r[1]||'', compra:parseFloat(r[2])||0, venda:parseFloat(r[3])||0, estoque:parseInt(r[4])||0, sheetRow:idx+2});
+    if(!r[0])return;
+    produtos.push({codigo:strCod(r[0]),nome:r[1]||'',compra:parseFloat(r[2])||0,venda:parseFloat(r[3])||0,estoque:parseInt(r[4])||0,sheetRow:idx+2});
   });
   renderProdutos(); renderSelect(); renderEstoque();
 }
 
-// ── RENDER ────────────────────────────────────────────────────────────────
-function renderProdutos() {
+// ── RENDER PRODUTOS ───────────────────────────────────────────────────────
+function renderProdutos(){
   var card=document.getElementById('card-lista');
   if(!produtos.length){card.classList.add('hidden');return;}
   card.classList.remove('hidden');
-  document.getElementById('titulo-lista').textContent='Lista de Produtos ('+produtos.length+')';
-  document.getElementById('tbody-produtos').innerHTML=produtos.map(function(p,i){
+  var sorted=produtos.slice().sort(function(a,b){return a.nome.localeCompare(b.nome,'pt-BR');});
+  document.getElementById('titulo-lista').textContent='Produtos ('+produtos.length+')';
+  document.getElementById('tbody-produtos').innerHTML=sorted.map(function(p){
     var m=p.venda>0?(((p.venda-p.compra)/p.venda)*100).toFixed(1)+'%':'-';
     var sc=p.estoque>3?'stock-ok':p.estoque>0?'stock-low':'stock-zero';
-    return '<tr class="'+(i%2===0?'even':'')+'"><td><span class="code">'+p.codigo+'</span></td><td>'+p.nome+'</td><td>'+fmtBRL(p.compra)+'</td><td>'+fmtBRL(p.venda)+'</td><td><span class="margin-chip">'+m+'</span></td><td><span class="stock-chip '+sc+'">'+p.estoque+'</span></td><td><button class="btn-warning" onclick="abrirModal(\''+p.codigo+'\')">✏️ Editar</button></td></tr>';
+    return '<tr><td><span class="code-chip">'+p.codigo+'</span></td><td style="color:var(--deep)">'+p.nome+'</td><td>'+fmtBRL(p.compra)+'</td><td>'+fmtBRL(p.venda)+'</td><td><span class="margin-chip">'+m+'</span></td><td><span class="stock-chip '+sc+'">'+p.estoque+'</span></td><td><button class="btn-edit" onclick="abrirModal(\''+p.codigo+'\')">Editar</button></td></tr>';
   }).join('');
 }
 
-function renderSelect() {
+function renderSelect(){
   var sel=document.getElementById('ped-produto');
-  sel.innerHTML='<option value="">-- Selecionar produto --</option>'+
-    produtos.filter(function(p){return p.estoque>0;}).map(function(p){
-      return '<option value="'+p.codigo+'">'+p.codigo+' — '+p.nome+' ('+fmtBRL(p.venda)+') | Est: '+p.estoque+'</option>';
-    }).join('');
+  var sorted=produtos.filter(function(p){return p.estoque>0;}).slice().sort(function(a,b){return a.nome.localeCompare(b.nome,'pt-BR');});
+  sel.innerHTML='<option value="">— Selecionar produto —</option>'+
+    sorted.map(function(p){return '<option value="'+p.codigo+'">'+p.nome+' — '+fmtBRL(p.venda)+' | Est: '+p.estoque+'</option>';}).join('');
   sel.selectedIndex=0;
 }
 
-function renderEstoque() {
-  var baixo=produtos.filter(function(p){return p.estoque<=3;});
-  var cardB=document.getElementById('card-baixo');
-  if(baixo.length){
-    cardB.classList.remove('hidden');
-    document.getElementById('titulo-baixo').textContent='⚠️ Estoque Baixo ('+baixo.length+' produtos)';
-    document.getElementById('tbody-baixo').innerHTML=baixo.map(function(p,i){
-      return '<tr class="'+(i%2===0?'even':'')+'"><td><span class="code">'+p.codigo+'</span></td><td>'+p.nome+'</td><td><span class="stock-chip stock-zero">'+p.estoque+'</span></td><td>'+fmtBRL(p.venda)+'</td><td><button class="btn-warning" onclick="abrirModal(\''+p.codigo+'\')">✏️ Editar</button></td></tr>';
-    }).join('');
-  } else cardB.classList.add('hidden');
-  var sorted=baixo.concat(produtos.filter(function(p){return p.estoque>3;}));
-  document.getElementById('tbody-estoque').innerHTML=sorted.map(function(p,i){
+function renderEstoque(){
+  var sorted=produtos.slice().sort(function(a,b){return a.nome.localeCompare(b.nome,'pt-BR');});
+  document.getElementById('tbody-estoque').innerHTML=sorted.map(function(p){
     var m=p.venda>0?(((p.venda-p.compra)/p.venda)*100).toFixed(1)+'%':'-';
     var sc=p.estoque>3?'stock-ok':p.estoque>0?'stock-low':'stock-zero';
-    return '<tr class="'+(i%2===0?'even':'')+'"><td><span class="code">'+p.codigo+'</span></td><td>'+p.nome+'</td><td>'+fmtBRL(p.compra)+'</td><td>'+fmtBRL(p.venda)+'</td><td><span class="margin-chip">'+m+'</span></td><td><span class="stock-chip '+sc+'">'+p.estoque+'</span></td><td>'+fmtBRL(p.compra*p.estoque)+'</td><td><button class="btn-warning" onclick="abrirModal(\''+p.codigo+'\')">✏️ Editar</button></td></tr>';
+    return '<tr><td><span class="code-chip">'+p.codigo+'</span></td><td style="color:var(--deep)">'+p.nome+'</td><td>'+fmtBRL(p.compra)+'</td><td>'+fmtBRL(p.venda)+'</td><td><span class="margin-chip">'+m+'</span></td><td><span class="stock-chip '+sc+'">'+p.estoque+'</span></td><td>'+fmtBRL(p.compra*p.estoque)+'</td><td><button class="btn-edit" onclick="abrirModal(\''+p.codigo+'\')">Editar</button></td></tr>';
   }).join('');
   document.getElementById('resumo-estoque').innerHTML=
-    '<div class="resumo-row"><span>Total produtos</span><span>'+produtos.length+'</span></div>'+
-    '<div class="resumo-row"><span>Valor em estoque (custo)</span><span class="green">'+fmtBRL(produtos.reduce(function(s,p){return s+p.compra*p.estoque;},0))+'</span></div>'+
-    '<div class="resumo-row"><span>Valor em estoque (venda)</span><span class="purple">'+fmtBRL(produtos.reduce(function(s,p){return s+p.venda*p.estoque;},0))+'</span></div>';
+    '<div style="display:flex;gap:32px;flex-wrap:wrap">'+
+    '<div><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px">Produtos</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:22px;color:var(--deep)">'+produtos.length+'</div></div>'+
+    '<div><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px">Valor em estoque (custo)</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:22px;color:var(--success)">'+fmtBRL(produtos.reduce(function(s,p){return s+p.compra*p.estoque;},0))+'</div></div>'+
+    '<div><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px">Valor em estoque (venda)</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:22px;color:var(--gold)">'+fmtBRL(produtos.reduce(function(s,p){return s+p.venda*p.estoque;},0))+'</div></div>'+
+    '</div>';
 }
 
-// ── MODAL EDITAR ──────────────────────────────────────────────────────────
-function abrirModal(codigo) {
-  var p=null; for(var i=0;i<produtos.length;i++){if(produtos[i].codigo===strCod(codigo)){p=produtos[i];break;}}
-  if(!p) return;
+// ── MODAL ─────────────────────────────────────────────────────────────────
+function abrirModal(codigo){
+  var p=null; for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===strCod(codigo)){p=produtos[i];break;}}
+  if(!p)return;
   document.getElementById('edit-codigo-orig').value=p.codigo;
   document.getElementById('edit-codigo').value=p.codigo;
   document.getElementById('edit-nome').value=p.nome;
@@ -404,66 +857,58 @@ function abrirModal(codigo) {
 }
 function fecharModal(){document.getElementById('modal-overlay').classList.add('hidden');}
 
-document.getElementById('btn-salvar-edicao').addEventListener('click', function(){
+document.getElementById('btn-salvar-edicao').addEventListener('click',function(){
   var codigo=document.getElementById('edit-codigo-orig').value;
   var nome=document.getElementById('edit-nome').value.trim();
   var compra=parseFloat(document.getElementById('edit-compra').value)||0;
   var venda=parseFloat(document.getElementById('edit-venda').value)||0;
   var estoque=parseInt(document.getElementById('edit-estoque').value)||0;
-  if(!nome||!compra||!venda) return showToast('Preencha todos os campos.','err');
-  setLoading('btn-salvar-edicao',true,'Salvar');
-  showToast('Salvando...','loading');
-  gsPost({action:'editarProduto', codigo:codigo, nome:nome, compra:compra, venda:venda, estoque:estoque, dataHoje:new Date().toLocaleDateString('pt-BR')})
-  .then(function(){ return loadAll(); })
-  .then(function(){
-    fecharModal(); hideToast(); showToast('Produto atualizado! ✓');
-    setLoading('btn-salvar-edicao',false,'Salvar');
-  })
-  .catch(function(e){showToast('Erro: '+e.message,'err');setLoading('btn-salvar-edicao',false,'Salvar');});
+  if(!nome||!compra||!venda)return showToast('Preencha todos os campos.','err');
+  setLoading('btn-salvar-edicao',true,'Salvar alterações');
+  showToast('Salvando…','loading');
+  gsPost({action:'editarProduto',codigo:codigo,nome:nome,compra:compra,venda:venda,estoque:estoque,dataHoje:new Date().toLocaleDateString('pt-BR')})
+  .then(function(){return loadAll();})
+  .then(function(){fecharModal();hideToast();showToast('Produto atualizado ✓');setLoading('btn-salvar-edicao',false,'Salvar alterações');})
+  .catch(function(e){showToast('Erro: '+e.message,'err');setLoading('btn-salvar-edicao',false,'Salvar alterações');});
 });
 
-// ── CADASTRO PRODUTO ──────────────────────────────────────────────────────
-document.getElementById('p-compra').addEventListener('input', calcMargem);
-document.getElementById('p-venda').addEventListener('input', calcMargem);
+// ── CADASTRO ──────────────────────────────────────────────────────────────
+document.getElementById('p-compra').addEventListener('input',calcMargem);
+document.getElementById('p-venda').addEventListener('input',calcMargem);
 function calcMargem(){
   var c=parseFloat(document.getElementById('p-compra').value)||0;
   var v=parseFloat(document.getElementById('p-venda').value)||0;
   var box=document.getElementById('margem-box');
-  if(c&&v){box.classList.remove('hidden');document.getElementById('margem-val').textContent=(((v-c)/v)*100).toFixed(1)+'%';document.getElementById('margem-sub').textContent='Lucro: '+fmtBRL(v-c);}
+  if(c&&v){box.classList.remove('hidden');document.getElementById('margem-val').textContent=(((v-c)/v)*100).toFixed(1)+'%';document.getElementById('margem-sub').textContent='Lucro unitário: '+fmtBRL(v-c);}
   else box.classList.add('hidden');
 }
 
-document.getElementById('btn-salvar-produto').addEventListener('click', function(){
+document.getElementById('btn-salvar-produto').addEventListener('click',function(){
   var codigo=document.getElementById('p-codigo').value.trim();
   var nome=document.getElementById('p-nome').value.trim();
   var compra=parseFloat(document.getElementById('p-compra').value)||0;
   var venda=parseFloat(document.getElementById('p-venda').value)||0;
   var estoque=parseInt(document.getElementById('p-estoque').value)||0;
-  if(!codigo||!nome||!compra||!venda) return showToast('Preencha todos os campos obrigatórios.','err');
-  for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===strCod(codigo)) return showToast('Código já cadastrado.','err');}
-  setLoading('btn-salvar-produto',true,'Cadastrar Produto');
-  showToast('Salvando...','loading');
-  gsPost({
-    action:'cadastrarProduto',
-    produto:[codigo,nome,compra,venda,estoque],
-    estoque:[codigo,nome,estoque,new Date().toLocaleDateString('pt-BR')]
-  })
-  .then(function(){ return loadAll(); })
+  if(!codigo||!nome||!compra||!venda)return showToast('Preencha todos os campos obrigatórios.','err');
+  for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===strCod(codigo))return showToast('Código já cadastrado.','err');}
+  setLoading('btn-salvar-produto',true,'Adicionar Produto');
+  showToast('Salvando…','loading');
+  gsPost({action:'cadastrarProduto',produto:[codigo,nome,compra,venda,estoque],estoque:[codigo,nome,estoque,new Date().toLocaleDateString('pt-BR')]})
+  .then(function(){return loadAll();})
   .then(function(){
-    hideToast(); showToast('Produto cadastrado! ✓');
+    hideToast();showToast('Produto adicionado ✓');
     ['p-codigo','p-nome','p-compra','p-venda','p-estoque'].forEach(function(id){document.getElementById(id).value='';});
     document.getElementById('margem-box').classList.add('hidden');
-    setLoading('btn-salvar-produto',false,'Cadastrar Produto');
+    setLoading('btn-salvar-produto',false,'Adicionar Produto');
   })
-  .catch(function(e){showToast('Erro: '+e.message,'err');setLoading('btn-salvar-produto',false,'Cadastrar Produto');});
+  .catch(function(e){showToast('Erro: '+e.message,'err');setLoading('btn-salvar-produto',false,'Adicionar Produto');});
 });
 
-// ── FRETE PAGO ────────────────────────────────────────────────────────────
+// ── FRETE ─────────────────────────────────────────────────────────────────
 function toggleFretePago(){
   var cb=document.getElementById('frete-pago-cliente');
-  var row=document.getElementById('check-frete-row');
   cb.checked=!cb.checked;
-  row.classList.toggle('checked',cb.checked);
+  document.getElementById('check-frete-row').classList.toggle('checked',cb.checked);
   calcResumo();
 }
 
@@ -473,20 +918,20 @@ document.getElementById('ped-desconto').addEventListener('input',calcResumo);
 document.getElementById('ped-frete').addEventListener('input',calcResumo);
 document.getElementById('ped-embalagem').addEventListener('input',calcResumo);
 
-document.getElementById('btn-add-item').addEventListener('click', function(){
+document.getElementById('btn-add-item').addEventListener('click',function(){
   var sel=document.getElementById('ped-produto');
   var codigo=sel.options[sel.selectedIndex]?strCod(sel.options[sel.selectedIndex].value):'';
   var qtd=parseInt(document.getElementById('ped-qtd').value)||1;
-  if(!codigo) return showToast('Selecione um produto.','err');
-  var p=null; for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===codigo){p=produtos[i];break;}}
-  if(!p) return showToast('Produto não encontrado.','err');
-  if(p.estoque<qtd) return showToast('Estoque insuficiente ('+p.estoque+' un).','err');
-  var exist=-1; for(var j=0;j<itensPedido.length;j++){if(strCod(itensPedido[j].codigo)===codigo){exist=j;break;}}
-  if(exist>=0) itensPedido[exist].qtd+=qtd;
+  if(!codigo)return showToast('Selecione um produto.','err');
+  var p=null;for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===codigo){p=produtos[i];break;}}
+  if(!p)return showToast('Produto não encontrado.','err');
+  if(p.estoque<qtd)return showToast('Estoque insuficiente ('+p.estoque+' un).','err');
+  var exist=-1;for(var j=0;j<itensPedido.length;j++){if(strCod(itensPedido[j].codigo)===codigo){exist=j;break;}}
+  if(exist>=0)itensPedido[exist].qtd+=qtd;
   else itensPedido.push({codigo:p.codigo,nome:p.nome,qtd:qtd,venda:p.venda,compra:p.compra});
-  var selProd=document.getElementById('ped-produto'); selProd.selectedIndex=0; selProd.value='';
+  var sp=document.getElementById('ped-produto');sp.selectedIndex=0;sp.value='';
   document.getElementById('ped-qtd').value=1;
-  renderItens(); calcResumo();
+  renderItens();calcResumo();
 });
 
 function removeItem(i){itensPedido.splice(i,1);renderItens();calcResumo();}
@@ -497,8 +942,8 @@ function renderItens(){
   wrap.classList.remove('hidden');
   var desc=parseFloat(document.getElementById('ped-desconto').value)||0;
   document.getElementById('tbody-itens').innerHTML=itensPedido.map(function(it,i){
-    var sub=it.venda*it.qtd; var subDesc=sub*(1-desc/100);
-    return '<tr class="'+(i%2===0?'even':'')+'"><td><span class="code">'+it.codigo+'</span> '+it.nome+'</td><td>'+it.qtd+'</td><td>'+fmtBRL(it.venda)+'</td><td>'+fmtBRL(it.compra)+'</td><td>'+fmtBRL(sub)+'</td><td>'+(desc>0?'<span class="desc-chip">'+fmtBRL(subDesc)+'</span>':fmtBRL(subDesc))+'</td><td><button class="btn-remove" onclick="removeItem('+i+')">✕</button></td></tr>';
+    var sub=it.venda*it.qtd;var subDesc=sub*(1-desc/100);
+    return '<tr><td style="color:var(--deep)">'+it.nome+' <span class="code-chip">'+it.codigo+'</span></td><td>'+it.qtd+'</td><td>'+fmtBRL(it.venda)+'</td><td>'+fmtBRL(it.compra)+'</td><td>'+fmtBRL(sub)+'</td><td>'+(desc>0?'<span class="desc-chip">'+fmtBRL(subDesc)+'</span>':fmtBRL(subDesc))+'</td><td><button class="btn-remove" onclick="removeItem('+i+')">×</button></td></tr>';
   }).join('');
 }
 
@@ -522,21 +967,21 @@ function calcResumo(){
     resumo.classList.remove('hidden');
     document.getElementById('res-bruto').textContent=fmtBRL(bruto);
     document.getElementById('res-desc-label').textContent='Desconto ('+desc+'%)';
-    document.getElementById('res-desc').textContent=desc>0?'- '+fmtBRL(descVal):'R$ 0,00';
+    document.getElementById('res-desc').textContent=desc>0?'- '+fmtBRL(descVal):'—';
     document.getElementById('res-receita').textContent=fmtBRL(receita);
-    var rowFrete=document.getElementById('row-frete-info');
-    if(fretePago&&frete>0){rowFrete.classList.remove('hidden');document.getElementById('res-frete-val').textContent=fmtBRL(frete)+' ✓';}
-    else rowFrete.classList.add('hidden');
+    var rf=document.getElementById('row-frete-info');
+    if(fretePago&&frete>0){rf.classList.remove('hidden');document.getElementById('res-frete-val').textContent=fmtBRL(frete)+' ✓';}
+    else rf.classList.add('hidden');
     document.getElementById('res-custo-pecas').textContent=fmtBRL(custoPecas);
     document.getElementById('res-extra').textContent=fmtBRL(extra);
     document.getElementById('res-custo').textContent=fmtBRL(custoTotal);
-    var elL=document.getElementById('res-lucro'); elL.textContent=fmtBRL(lucro); elL.className=lucro>=0?'green':'red';
+    var el=document.getElementById('res-lucro');el.textContent=fmtBRL(lucro);el.className=lucro>=0?'c-green':'c-red';
     document.getElementById('res-margem').textContent=fmtPct(margem);
   } else resumo.classList.add('hidden');
 }
 
-document.getElementById('btn-finalizar').addEventListener('click', function(){
-  if(!itensPedido.length) return showToast('Adicione ao menos um item.','err');
+document.getElementById('btn-finalizar').addEventListener('click',function(){
+  if(!itensPedido.length)return showToast('Adicione ao menos um item.','err');
   var cliente=document.getElementById('ped-cliente').value||'—';
   var dataInput=document.getElementById('ped-data').value;
   var dataBR=dataInput?dataInput.split('-').reverse().join('/'):new Date().toLocaleDateString('pt-BR');
@@ -555,67 +1000,69 @@ document.getElementById('btn-finalizar').addEventListener('click', function(){
   var qtdItens=itensPedido.reduce(function(s,i){return s+i.qtd;},0);
   var pedId='PED-'+Date.now();
   var itensSnap=itensPedido.slice();
-
-  // monta atualizações de estoque capturando valores agora
   var atualizacoes=[];
   itensSnap.forEach(function(it){
-    var p=null; for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===strCod(it.codigo)){p=produtos[i];break;}}
-    if(p) atualizacoes.push({codigo:it.codigo, novoEstoque:Math.max(0,p.estoque-it.qtd), data:dataBR});
+    var p=null;for(var i=0;i<produtos.length;i++){if(strCod(produtos[i].codigo)===strCod(it.codigo)){p=produtos[i];break;}}
+    if(p)atualizacoes.push({codigo:it.codigo,novoEstoque:Math.max(0,p.estoque-it.qtd),data:dataBR});
   });
-
-  // monta itens
   var itensRows=itensSnap.map(function(it){
-    var subV=it.venda*it.qtd; var subD=subV*(1-desc/100); var subC=it.compra*it.qtd;
-    return [pedId,it.codigo,it.nome,it.qtd,it.venda,it.compra,subV,subD,subC];
+    var subV=it.venda*it.qtd;var subD=subV*(1-desc/100);var subC=it.compra*it.qtd;
+    return[pedId,it.codigo,it.nome,it.qtd,it.venda,it.compra,subV,subD,subC];
   });
-
-  setLoading('btn-finalizar',true,'✓ Finalizar Pedido');
-  showToast('Registrando pedido...','loading');
-
-  // 1 única chamada para tudo
-  gsPost({
-    action:'salvarPedido',
-    pedido:[pedId,dataBR,cliente,frete,fretePago?'Sim':'Não',emb,bruto,descVal,receita,custoPecas,custoTotal,lucro,margem,qtdItens],
-    itens:itensRows,
-    atualizacoes:atualizacoes
-  })
-  .then(function(){ return loadAll(); })
+  setLoading('btn-finalizar',true,'Finalizar Pedido');
+  showToast('Registrando…','loading');
+  gsPost({action:'salvarPedido',pedido:[pedId,dataBR,cliente,frete,fretePago?'Sim':'Não',emb,bruto,descVal,receita,custoPecas,custoTotal,lucro,margem,qtdItens],itens:itensRows,atualizacoes:atualizacoes})
+  .then(function(){return loadAll();})
   .then(function(){
-    hideToast();
-    showToast('Pedido registrado! Lucro: '+fmtBRL(lucro)+' ✓');
+    hideToast();showToast('Pedido registrado! Lucro: '+fmtBRL(lucro)+' ✓');
     itensPedido=[];
     ['ped-cliente','ped-frete','ped-embalagem','ped-desconto'].forEach(function(id){document.getElementById(id).value='';});
     document.getElementById('ped-data').value=today();
     document.getElementById('frete-pago-cliente').checked=false;
     document.getElementById('check-frete-row').classList.remove('checked');
-    renderItens(); calcResumo();
-    setLoading('btn-finalizar',false,'✓ Finalizar Pedido');
+    renderItens();calcResumo();
+    setLoading('btn-finalizar',false,'Finalizar Pedido');
     renderHistorico();
   })
-  .catch(function(e){showToast('Erro: '+e.message,'err');setLoading('btn-finalizar',false,'✓ Finalizar Pedido');});
+  .catch(function(e){showToast('Erro: '+e.message,'err');setLoading('btn-finalizar',false,'Finalizar Pedido');});
 });
 
-// ── HISTÓRICO ─────────────────────────────────────────────────────────────
-function colMap(header){
-  var m={};
-  for(var i=0;i<header.length;i++) m[header[i].toString().trim().toLowerCase()]=i;
-  return m;
+// ── HELPERS DATA ──────────────────────────────────────────────────────────
+function parseAnyDate(val){
+  if(!val)return null;
+  var s=String(val).trim();
+  if(s.indexOf('T')>-1)return new Date(s);
+  var m1=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(m1)return new Date(parseInt(m1[3]),parseInt(m1[2])-1,parseInt(m1[1]));
+  var m3=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m3)return new Date(parseInt(m3[1]),parseInt(m3[2])-1,parseInt(m3[3]));
+  var n=parseFloat(s);
+  if(!isNaN(n)&&n>40000)return new Date((n-25569)*86400*1000);
+  return null;
 }
-function col(row,map,names,fallback){
-  for(var i=0;i<names.length;i++){var idx=map[names[i].toLowerCase()];if(idx!==undefined&&row[idx]!==undefined&&row[idx]!=='')return row[idx];}
-  return fallback!==undefined?fallback:'';
+function formatDateBR(val){
+  var d=parseAnyDate(val);
+  if(!d)return String(val||'');
+  return('0'+d.getUTCDate()).slice(-2)+'/'
+    +('0'+(d.getUTCMonth()+1)).slice(-2)+'/'
+    +d.getUTCFullYear();
 }
+function parseDateChave(val){
+  var d=parseAnyDate(val);
+  if(!d)return'Sem data';
+  return d.getUTCFullYear()+'-'+('0'+(d.getUTCMonth()+1)).slice(-2);
+}
+function colMap(h){var m={};for(var i=0;i<h.length;i++)m[h[i].toString().trim().toLowerCase()]=i;return m;}
+function col(row,map,names,fb){for(var i=0;i<names.length;i++){var idx=map[names[i].toLowerCase()];if(idx!==undefined&&row[idx]!==undefined&&row[idx]!=='')return row[idx];}return fb!==undefined?fb:'';}
 
+// ── HISTÓRICO ─────────────────────────────────────────────────────────────
 function renderHistorico(){
   var rows=pedidosCache;
-  if(!rows||rows.length<2){
-    document.getElementById('historico-vazio').classList.remove('hidden');
-    document.getElementById('tbody-historico').innerHTML=''; return;
-  }
-  var header=rows[0]; var cm=colMap(header);
+  if(!rows||rows.length<2){document.getElementById('historico-vazio').classList.remove('hidden');document.getElementById('tbody-historico').innerHTML='';return;}
+  var header=rows[0];var cm=colMap(header);
   var pedidos=rows.slice(1).filter(function(r){return r[0];}).map(function(r){
-    return {
-      id:r[0]||'', data:formatDateBR(r[1]), cliente:r[2]||'—',
+    return{
+      id:r[0]||'',data:formatDateBR(r[1]),cliente:r[2]||'—',
       frete:parseFloat(col(r,cm,['frete'],0))||0,
       fretePago:col(r,cm,['frete pago cliente'],'não').toString().toLowerCase()==='sim',
       receita:parseFloat(col(r,cm,['receita liquida','receita líquida','total receita'],0))||0,
@@ -625,111 +1072,63 @@ function renderHistorico(){
     };
   }).reverse();
   document.getElementById('historico-vazio').classList.add('hidden');
-  document.getElementById('tbody-historico').innerHTML=pedidos.map(function(p,i){
-    var lucroClass=p.lucro>=0?'green':'red';
+  document.getElementById('tbody-historico').innerHTML=pedidos.map(function(p){
+    var lc=p.lucro>=0?'c-green':'c-red';
     var freteCell=p.frete>0?(p.fretePago?fmtBRL(p.frete)+' <span class="frete-pago-badge">Cliente</span>':fmtBRL(p.frete)):'—';
-    return '<tr class="'+(i%2===0?'even':'')+'"><td><span class="code">'+p.id+'</span></td><td>'+p.data+'</td><td>'+p.cliente+'</td><td style="text-align:center">'+p.qtdItens+'</td><td>'+freteCell+'</td><td class="green">'+fmtBRL(p.receita)+'</td><td class="'+lucroClass+'">'+fmtBRL(p.lucro)+'</td><td><span class="margin-chip">'+fmtPct(p.margem)+'</span></td></tr>';
+    return'<tr><td><span class="code-chip" style="font-size:9px">'+p.id+'</span></td><td>'+p.data+'</td><td style="color:var(--deep)">'+p.cliente+'</td><td style="text-align:center">'+p.qtdItens+'</td><td>'+freteCell+'</td><td class="c-green">'+fmtBRL(p.receita)+'</td><td class="'+lc+'">'+fmtBRL(p.lucro)+'</td><td><span class="margin-chip">'+fmtPct(p.margem)+'</span></td></tr>';
   }).join('');
 }
 
-document.getElementById('btn-atualizar-historico').addEventListener('click', function(){
-  showToast('Atualizando...','loading');
-  loadAll().then(function(){ hideToast(); renderHistorico(); });
+document.getElementById('btn-atualizar-historico').addEventListener('click',function(){
+  showToast('Atualizando…','loading');
+  loadAll().then(function(){hideToast();renderHistorico();});
 });
 
 // ── RELATÓRIO ─────────────────────────────────────────────────────────────
-// Extrai objeto Date de qualquer formato que o Sheets possa enviar
-function parseAnyDate(val) {
-  if (!val) return null;
-  var s = String(val).trim();
-  // ISO: 2026-04-12T03:00:00.000Z
-  if (s.indexOf('T') > -1) return new Date(s);
-  // dd/mm/yyyy
-  var m1 = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if (m1) return new Date(parseInt(m1[3]), parseInt(m1[2])-1, parseInt(m1[1]));
-  // yyyy-mm-dd
-  var m3 = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (m3) return new Date(parseInt(m3[1]), parseInt(m3[2])-1, parseInt(m3[3]));
-  // número serial Excel
-  var n = parseFloat(s);
-  if (!isNaN(n) && n > 40000) return new Date((n - 25569) * 86400 * 1000);
-  return null;
-}
-
-// Formata data para exibição dd/mm/yyyy
-function formatDateBR(val) {
-  var d = parseAnyDate(val);
-  if (!d) return String(val||'');
-  return ('0'+d.getUTCDate()).slice(-2)+'/'
-    +('0'+(d.getUTCMonth()+1)).slice(-2)+'/'
-    +d.getUTCFullYear();
-}
-
-// Converte qualquer formato de data para chave 'yyyy-mm'
-function parseDateChave(val) {
-  var d = parseAnyDate(val);
-  if (!d) return 'Sem data';
-  return d.getUTCFullYear()+'-'+('0'+(d.getUTCMonth()+1)).slice(-2);
-}
-
 function renderRelatorio(){
   var rows=pedidosCache;
   if(!rows||rows.length<2){
-    document.getElementById('kpi-grid').innerHTML='<div style="color:#64748b;grid-column:1/-1;padding:10px 0">Nenhum pedido registrado ainda.</div>';
-    document.getElementById('tbody-relatorio').innerHTML=''; return;
+    document.getElementById('kpi-grid').innerHTML='<div style="color:var(--taupe);grid-column:1/-1;padding:10px 0;font-size:13px">Nenhum pedido registrado ainda.</div>';
+    document.getElementById('tbody-relatorio').innerHTML='';return;
   }
-  var header=rows[0]; var cm=colMap(header);
+  var header=rows[0];var cm=colMap(header);
   var pedidos=rows.slice(1).filter(function(r){return r[0];}).map(function(r){
-    return {
-      data:r[1]||'',
-      receita:parseFloat(col(r,cm,['receita liquida','receita líquida','total receita'],0))||0,
-      custo:parseFloat(col(r,cm,['custo total','total custo'],0))||0,
-      lucro:parseFloat(col(r,cm,['lucro'],0))||0
-    };
+    return{data:r[1]||'',receita:parseFloat(col(r,cm,['receita liquida','receita líquida','total receita'],0))||0,custo:parseFloat(col(r,cm,['custo total','total custo'],0))||0,lucro:parseFloat(col(r,cm,['lucro'],0))||0};
   });
-  if(!pedidos.length){
-    document.getElementById('kpi-grid').innerHTML='<div style="color:#64748b;grid-column:1/-1;padding:10px 0">Nenhum pedido registrado ainda.</div>';
-    document.getElementById('tbody-relatorio').innerHTML=''; return;
-  }
+  if(!pedidos.length){document.getElementById('kpi-grid').innerHTML='';document.getElementById('tbody-relatorio').innerHTML='';return;}
   var totReceita=pedidos.reduce(function(s,p){return s+p.receita;},0);
   var totLucro=pedidos.reduce(function(s,p){return s+p.lucro;},0);
   var margemMedia=totReceita>0?(totLucro/totReceita)*100:0;
   document.getElementById('kpi-grid').innerHTML=
-    '<div class="kpi-card"><div class="kpi-label">Total de Pedidos</div><div class="kpi-val">'+pedidos.length+'</div><div class="kpi-sub">acumulado</div></div>'+
-    '<div class="kpi-card"><div class="kpi-label">Receita Total</div><div class="kpi-val green">'+fmtBRL(totReceita)+'</div><div class="kpi-sub">líquida com descontos</div></div>'+
-    '<div class="kpi-card"><div class="kpi-label">Lucro Total</div><div class="kpi-val '+(totLucro>=0?'green':'red')+'">'+fmtBRL(totLucro)+'</div><div class="kpi-sub">receita − custos</div></div>'+
-    '<div class="kpi-card"><div class="kpi-label">Margem Média</div><div class="kpi-val purple">'+fmtPct(margemMedia)+'</div><div class="kpi-sub">sobre receita líquida</div></div>';
+    '<div class="kpi-card"><div class="kpi-label">Pedidos</div><div class="kpi-val">'+pedidos.length+'</div><div class="kpi-sub">total acumulado</div></div>'+
+    '<div class="kpi-card"><div class="kpi-label">Receita Total</div><div class="kpi-val" style="color:var(--success)">'+fmtBRL(totReceita)+'</div><div class="kpi-sub">líquida com descontos</div></div>'+
+    '<div class="kpi-card"><div class="kpi-label">Lucro Total</div><div class="kpi-val" style="color:'+(totLucro>=0?'var(--success)':'var(--rouge)')+'">'+fmtBRL(totLucro)+'</div><div class="kpi-sub">receita − custos</div></div>'+
+    '<div class="kpi-card"><div class="kpi-label">Margem Média</div><div class="kpi-val" style="color:var(--gold)">'+fmtPct(margemMedia)+'</div><div class="kpi-sub">sobre receita líquida</div></div>';
   var meses={};
   pedidos.forEach(function(p){
-    var chave = parseDateChave(p.data);
+    var chave=parseDateChave(p.data);
     if(!meses[chave])meses[chave]={pedidos:0,receita:0,custo:0,lucro:0};
     meses[chave].pedidos++;meses[chave].receita+=p.receita;meses[chave].custo+=p.custo;meses[chave].lucro+=p.lucro;
   });
-  var sorted=Object.keys(meses).sort();
+  var sorted=Object.keys(meses).sort().reverse();
   document.getElementById('tbody-relatorio').innerHTML=sorted.map(function(chave,i){
-    var v=meses[chave]; var m=v.receita>0?(v.lucro/v.receita)*100:0;
+    var v=meses[chave];var m=v.receita>0?(v.lucro/v.receita)*100:0;
     var nomeMes=chave;
     if(chave!=='Sem data'){var parts=chave.split('-');try{nomeMes=new Date(parseInt(parts[0]),parseInt(parts[1])-1,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'});}catch(e){}}
-    return '<tr class="'+(i%2===0?'even':'')+'"><td><span class="mes-badge">'+nomeMes+'</span></td><td>'+v.pedidos+'</td><td class="green">'+fmtBRL(v.receita)+'</td><td class="red">'+fmtBRL(v.custo)+'</td><td class="'+(v.lucro>=0?'green':'red')+'">'+fmtBRL(v.lucro)+'</td><td><span class="margin-chip">'+fmtPct(m)+'</span></td></tr>';
+    return'<tr><td><span class="mes-badge">'+nomeMes+'</span></td><td>'+v.pedidos+'</td><td class="c-green">'+fmtBRL(v.receita)+'</td><td class="c-red">'+fmtBRL(v.custo)+'</td><td class="'+(v.lucro>=0?'c-green':'c-red')+'">'+fmtBRL(v.lucro)+'</td><td><span class="margin-chip">'+fmtPct(m)+'</span></td></tr>';
   }).join('');
 }
 
-document.getElementById('btn-atualizar-estoque').addEventListener('click', function(){
-  showToast('Atualizando...','loading');
-  loadAll().then(function(){ hideToast(); });
-});
-document.getElementById('btn-atualizar-relatorio').addEventListener('click', function(){
-  showToast('Atualizando...','loading');
-  loadAll().then(function(){ hideToast(); renderRelatorio(); });
-});
+document.getElementById('btn-atualizar-estoque').addEventListener('click',function(){showToast('Atualizando…','loading');loadAll().then(function(){hideToast();});});
+document.getElementById('btn-atualizar-relatorio').addEventListener('click',function(){showToast('Atualizando…','loading');loadAll().then(function(){hideToast();renderRelatorio();});});
 
 function showTab(tab){
   ['produtos','pedidos','estoque','relatorio'].forEach(function(t){
     document.getElementById('tab-'+t).classList.toggle('hidden',t!==tab);
     document.getElementById('nav-'+t).classList.toggle('active',t===tab);
   });
-  if(tab==='relatorio') renderRelatorio();
-  if(tab==='pedidos') renderHistorico();
+  if(tab==='relatorio')renderRelatorio();
+  if(tab==='pedidos')renderHistorico();
 }
 </script>
 </body>
