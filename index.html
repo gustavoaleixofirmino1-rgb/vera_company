@@ -1070,7 +1070,13 @@ function renderHistorico(){
       margem:parseFloat(col(r,cm,['margem%','margem'],0))||0,
       qtdItens:parseInt(col(r,cm,['qtd itens'],0))||0
     };
-  }).reverse();
+  }).sort(function(a,b){
+    var da=parseAnyDate(a.data), db=parseAnyDate(b.data);
+    if(!da&&!db)return 0;
+    if(!da)return 1;
+    if(!db)return -1;
+    return db-da; // mais recente primeiro
+  });
   document.getElementById('historico-vazio').classList.add('hidden');
   document.getElementById('tbody-historico').innerHTML=pedidos.map(function(p){
     var lc=p.lucro>=0?'c-green':'c-red';
